@@ -9,11 +9,12 @@ import { isAuthenticated } from '../utils/authHelper';
 import { getCurrentDate } from '../utils/getCurrentDate';
 import { isVet } from '../utils/userType';
 import { SearchListParamter } from '../utils/VisitListParameters';
+import { domain } from './config/domain';
 
 export class SurgeryApiCalls {
 	baseUrl: string;
 	constructor() {
-		this.baseUrl = 'http://localhost:8000/surgeries';
+		this.baseUrl = `http://${domain}/surgeries`;
 	}
 
 	getSurgery = async (surgeryId: string | undefined) => {

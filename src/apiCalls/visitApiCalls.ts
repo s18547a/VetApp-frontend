@@ -6,13 +6,14 @@ import {
 import { isAuthenticated } from '../utils/authHelper';
 import { isManager, isVet } from '../utils/userType';
 import { SearchListParamter } from '../utils/VisitListParameters';
+import { domain } from './config/domain';
 
 export class VisitApiCalls {
 	baseURL: string;
 	activities: string;
 	constructor() {
-		this.baseURL = 'http://localhost:8000/visits';
-		this.activities = 'http://localhost:8000/visits/activities';
+		this.baseURL = `http://${domain}/visits`;
+		this.activities = `http://${domain}/visits/activities`;
 	}
 
 	getVisitList = async () => {
@@ -76,7 +77,7 @@ export class VisitApiCalls {
 	};
 
 	deleteMedicalActivity = async (medicalActivityId: string) => {
-		const url = `http://localhost:8000/visits/activities/${medicalActivityId}`;
+		const url = `http://${domain}/visits/activities/${medicalActivityId}`;
 		const options = createHTTPDeleteOptions(isManager());
 		const promise = await fetch(url, options);
 		return promise;

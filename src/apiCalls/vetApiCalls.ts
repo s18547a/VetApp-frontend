@@ -7,12 +7,13 @@ import {
 } from '../utils/apiCallsHelper';
 import { isAuthenticated } from '../utils/authHelper';
 import { isManager, isVet } from '../utils/userType';
+import { domain } from './config/domain';
 export class VetApiCalls {
 	baseUrl: string;
 	baseUrlSchedulde;
 	constructor() {
-		this.baseUrl = 'http://localhost:8000/vets';
-		this.baseUrlSchedulde = 'http://localhost:8000/vets/schedulde';
+		this.baseUrl = `http://${domain}/vets`;
+		this.baseUrlSchedulde = `http://${domain}/vets/schedulde`;
 	}
 
 	getVets = async () => {
@@ -64,7 +65,7 @@ export class VetApiCalls {
 	};
 
 	getVetsOnDay = async (Day: string) => {
-		const url = `http://localhost:8000/vets?Date=${Day}`;
+		const url = `http://${domain}/vets?Date=${Day}`;
 		const options = createHttpGetOptions(isAuthenticated());
 		const promise = fetch(url, options);
 
@@ -119,7 +120,7 @@ export class VetApiCalls {
 	};
 
 	getTodaySchedulde = async (date: string, vetId: string) => {
-		const url = `http://localhost:8000/vets/todaySchedulde?Date=${date}&VetId=${vetId}`;
+		const url = `http://${domain}/vets/todaySchedulde?Date=${date}&VetId=${vetId}`;
 		const options = createHttpGetOptions(isVet());
 		const promise = await fetch(url, options);
 

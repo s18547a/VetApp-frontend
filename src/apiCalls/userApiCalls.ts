@@ -1,7 +1,9 @@
+import { domain } from './config/domain';
+
 export class UserApiCalls {
 	baseUrl: string;
 	constructor() {
-		this.baseUrl = 'http://localhost:8000/users';
+		this.baseUrl = `http://${domain}/users`;
 	}
 
 	login = async (user) => {

@@ -6,11 +6,12 @@ import {
 import { isAuthenticated } from '../utils/authHelper';
 import { getCurrentDate } from '../utils/getCurrentDate';
 import { isVet } from '../utils/userType';
+import { domain } from './config/domain';
 export class ReservationApiCalls {
 	baseUrl: string;
 
 	constructor() {
-		this.baseUrl = 'http://localhost:8000/reservations';
+		this.baseUrl = `http://${domain}/reservations`;
 	}
 
 	registerReservation = async (reservation) => {

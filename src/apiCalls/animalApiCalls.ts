@@ -6,13 +6,14 @@ import {
 } from '../utils/apiCallsHelper';
 import { getCurrentUser, isAuthenticated } from '../utils/authHelper';
 import { isManager, isVet } from '../utils/userType';
+import { domain } from './config/domain';
 
 export class AnimalApiCalls {
 	baseUrl: string;
 	illnessesUrl: string;
 	animalMedInfoURL: string;
 	constructor() {
-		this.baseUrl = 'http://localhost:8000/animals';
+		this.baseUrl = `http://${domain}/animals`;
 		this.illnessesUrl = `${this.baseUrl}/illnesses`;
 		this.animalMedInfoURL = `${this.baseUrl}/medicalInfo`;
 	}

@@ -1,10 +1,11 @@
 import { createHttpGetOptions } from '../utils/apiCallsHelper';
 import { isAuthenticated } from '../utils/authHelper';
 import { isVet } from '../utils/userType';
+import { domain } from './config/domain';
 export class OwnerApiCalls {
 	baseUrl: string;
 	constructor() {
-		this.baseUrl = 'http://localhost:8000/owners';
+		this.baseUrl = `http://${domain}/owners`;
 	}
 
 	getOwnerById = async (OwnerId: string) => {

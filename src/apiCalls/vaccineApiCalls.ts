@@ -6,11 +6,12 @@ import {
 } from '../utils/apiCallsHelper';
 import { isAuthenticated } from '../utils/authHelper';
 import { isManager } from '../utils/userType';
+import { domain } from './config/domain';
 
 export class VaccineApiCalls {
 	baseUrl: string;
 	constructor() {
-		this.baseUrl = 'http://localhost:8000/vaccines';
+		this.baseUrl = `http://${domain}/vaccines`;
 	}
 
 	getVaccines = async () => {
