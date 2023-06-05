@@ -1,5 +1,3 @@
-import { url } from 'inspector';
-import SurgeryType from '../classes/SurgeryType';
 import {
 	createHttpGetOptions,
 	createHTTPPostOptions,

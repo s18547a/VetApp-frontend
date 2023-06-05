@@ -25,6 +25,7 @@ function Pagination({
 					{pagedList.map((page) => {
 						return (
 							<li
+								key={page}
 								className={
 									pagedList.indexOf(page) == selectedPage
 										? 'page-item active'
