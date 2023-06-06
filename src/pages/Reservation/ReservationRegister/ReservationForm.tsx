@@ -1,4 +1,4 @@
-import { ReactElement, useState } from 'react';
+import { ReactElement, useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ReservationApiCalls } from '../../../apiCalls/reservationApiCalls';
 import { VetApiCalls } from '../../../apiCalls/vetApiCalls';
@@ -53,7 +53,7 @@ function ReservationForm(): ReactElement {
 
 	const reservationApiCalls = new ReservationApiCalls();
 	const vetApiCalls = new VetApiCalls();
-	const onDateChange = async (e): Promise<void> => {
+	const onDateChange = useCallback(async (e): Promise<void> => {
 		//	e.preventDefault();
 		console.log(e);
 		//const { name, value } = e.target;
@@ -93,7 +93,7 @@ function ReservationForm(): ReactElement {
 			console.log(error);
 			setServerError(true);
 		}
-	};
+	}, []);
 
 	const onVetChange = async (e) => {
 		e.preventDefault();
@@ -132,23 +132,23 @@ function ReservationForm(): ReactElement {
 		}
 	};
 
-	const onHourChange = async (e): Promise<void> => {
+	const onHourChange = useCallback(async (e): Promise<void> => {
 		const { name, value } = e.target;
 
 		setReservation((prev) => ({
 			...prev,
 			Hour: value,
 		}));
-	};
+	}, []);
 
-	const onOwnerChange = async (e): Promise<void> => {
+	const onOwnerChange = useCallback(async (e): Promise<void> => {
 		//const { name, value } = e.target;
 		const value = e.value;
 		setReservation((prev) => ({
 			...prev,
 			OwnerId: value,
 		}));
-	};
+	}, []);
 
 	const validateForm = (): boolean => {
 		let isValid: boolean = true;
@@ -193,9 +193,7 @@ function ReservationForm(): ReactElement {
 			}
 		}
 	};
-	const setServerErrorChild = () => {
-		setServerError(true);
-	};
+
 	const [disabledButton, setDisabledButton] = useState(false);
 	return (
 		<div>
@@ -227,7 +225,7 @@ function ReservationForm(): ReactElement {
 									<SelectOwnerComponent
 										onChange={onOwnerChange}
 										error={error.OwnerId}
-										setServerError={setServerErrorChild}
+										setServerError={setServerError}
 										selectedValue={reservation.OwnerId}
 										editForm={false}
 										realised={false}

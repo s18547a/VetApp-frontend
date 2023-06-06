@@ -1,7 +1,7 @@
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import pl from 'date-fns/locale/pl';
-import { ReactElement, useState } from 'react';
+import { ReactElement, memo, useState } from 'react';
 function FormDateReactDiv({
 	filter,
 	onChange,
@@ -74,4 +74,4 @@ function FormDateReactDiv({
 		</div>
 	);
 }
-export default FormDateReactDiv;
+export default memo(FormDateReactDiv);

@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, memo, useEffect, useState } from 'react';
 import { OwnerApiCalls } from '../../apiCalls/ownerApiCalls';
 import Owner from '../../classes/Owner';
 
@@ -52,7 +52,7 @@ function SelectOwnerComponent({
 			}
 		} catch (error) {
 			console.log(error);
-			setServerError();
+			setServerError(true);
 		}
 	};
 
@@ -78,4 +78,4 @@ function SelectOwnerComponent({
 	);
 }
 
-export default SelectOwnerComponent;
+export default memo(SelectOwnerComponent);

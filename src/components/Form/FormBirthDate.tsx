@@ -7,8 +7,6 @@ function FormBirthDate({ onChange, error, value }): ReactElement {
 		setNewDate(value);
 	}, [value]);
 	useEffect(() => {
-		console.log(value);
-		console.log(newDate);
 		onChange(newDate);
 	}, [newDate]);
 	const dayList = [
@@ -108,7 +106,11 @@ function FormBirthDate({ onChange, error, value }): ReactElement {
 						<option selected disabled></option>
 						{dayList.map((day) => {
 							return (
-								<option value={day} selected={value.split('-')[2] == day}>
+								<option
+									value={day}
+									selected={value.split('-')[2] == day}
+									key={day}
+								>
 									{day}
 								</option>
 							);
@@ -123,7 +125,11 @@ function FormBirthDate({ onChange, error, value }): ReactElement {
 						<option selected disabled></option>
 						{monthList.map((month) => {
 							return (
-								<option value={month} selected={value.split('-')[1] == month}>
+								<option
+									value={month}
+									selected={value.split('-')[1] == month}
+									key={month}
+								>
 									{month}
 								</option>
 							);
@@ -138,7 +144,11 @@ function FormBirthDate({ onChange, error, value }): ReactElement {
 						<option selected disabled></option>
 						{yearList.map((year) => {
 							return (
-								<option value={year} selected={value.split('-')[0] == year}>
+								<option
+									value={year}
+									selected={value.split('-')[0] == year}
+									key={year}
+								>
 									{year}
 								</option>
 							);

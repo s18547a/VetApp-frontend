@@ -59,6 +59,7 @@ function AnimalRegister(): ReactElement {
 	let navigate = useNavigate();
 
 	const animalApiCalls = new AnimalApiCalls();
+
 	useEffect(() => {
 		if (isOwner()) {
 			setAnimal((prev) => ({
@@ -111,12 +112,11 @@ function AnimalRegister(): ReactElement {
 		if (newValue == 'true') {
 			newValue = true;
 		}
-		console.log(name + value);
+
 		setAnimal((prev) => ({
 			...prev,
 			[name]: newValue,
 		}));
-		console.log(animal);
 	};
 
 	const handleDateChange = (e): void => {
@@ -134,7 +134,6 @@ function AnimalRegister(): ReactElement {
 			error[name] = '';
 
 			if (value === '' || value == undefined || value == null) {
-				console.log(name);
 				if (name != 'ProfileImage') {
 					setError((prevErrors) => ({
 						...prevErrors,
@@ -159,7 +158,7 @@ function AnimalRegister(): ReactElement {
 		return isValid;
 	};
 
-	const handleSubmit = async (e): Promise<void> => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 
 		console.log(animal);

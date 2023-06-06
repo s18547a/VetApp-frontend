@@ -61,60 +61,43 @@ function VetScheduldeForm(): ReactElement {
 		}[]
 	>([]);
 	const naviagate = useNavigate();
-	useEffect(() => {
-		const paramVetId = params.VetId;
-		setVetId(paramVetId);
-		let response;
-		let promise;
-		promise = vetApiCalls.getVetSchedulde(paramVetId);
+	const loadVetSchedulde = async () => {
+		try {
+			const paramVetId = params.VetId;
+			setVetId(paramVetId);
 
-		if (promise) {
-			promise
-				.then((data) => {
-					response = data;
-					return response.json();
-				})
-				.then(
-					(data) => {
-						if (response.status == 200) {
-							for (const [name, value] of Object.entries(data)) {
-								setSchedulde((prev) => ({
-									...prev,
-									[name]: value,
-								}));
-								if (value == null) {
-									setSchedulde((prev) => ({
-										...prev,
-										[name]: '',
-									}));
-								}
-								//}
-							}
+			const response = await vetApiCalls.getVetSchedulde(paramVetId);
+
+			if (response) {
+				if (response.status == 200) {
+					const data = await response.json();
+					for (const [name, value] of Object.entries(data)) {
+						setSchedulde((prev) => ({
+							...prev,
+							[name]: value,
+						}));
+						if (value == null) {
+							setSchedulde((prev) => ({
+								...prev,
+								[name]: '',
+							}));
 						}
-					},
-					(error) => {
-						console.log(error);
-						setServerError(true);
+						//}
 					}
-				);
+				}
+			}
+			const response2 = await vetApiCalls.getFullSchedulde();
+			if (response2) {
+				const data2 = await response2.json();
+				setFullSchedulde(data2);
+			}
+		} catch (error) {
+			console.log(error);
+			setServerError(true);
 		}
-		promise = vetApiCalls.getFullSchedulde();
-		if (promise) {
-			promise
-				.then((data) => {
-					response = data;
-					return data.json();
-				})
-				.then(
-					(data) => {
-						setFullSchedulde(data);
-					},
-					(error) => {
-						setServerError(true);
-						console.log(error);
-					}
-				);
-		}
+	};
+	useEffect(() => {
+		loadVetSchedulde();
 	}, []);
 
 	const handleChange = (e) => {
@@ -183,47 +166,37 @@ function VetScheduldeForm(): ReactElement {
 		return isValid;
 	};
 
-	const handleSubmit = (e): void => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		isValid();
 		if (isValid()) {
-			const newSchedulde = {
-				VetId: params.VetId,
-				...schedulde,
-			};
-			for (const [name, value] of Object.entries(newSchedulde)) {
-				if (value == '') {
-					newSchedulde[name] = null;
-				}
-			}
-			console.log(newSchedulde);
-
-			console.log(vetId);
-
-			let results;
-			vetApiCalls
-				.updateSchedulde(newSchedulde)
-				.then((res) => {
-					results = res;
-					return res.json();
-				})
-				.then(
-					(data) => {
-						if (results.status == 201) {
-							navigate(`/vets/${params.VetId}`);
-						}
-						if (results.status == 500) {
-							console.log(data);
-							setServerError(true);
-						}
-					},
-					(error) => {
-						console.log(error);
+			try {
+				const newSchedulde = {
+					VetId: params.VetId,
+					...schedulde,
+				};
+				for (const [name, value] of Object.entries(newSchedulde)) {
+					if (value == '') {
+						newSchedulde[name] = null;
 					}
-				);
+				}
+
+				const response = await vetApiCalls.updateSchedulde(newSchedulde);
+				if (response) {
+					if (response.status == 201) {
+						navigate(`/vets/${params.VetId}`);
+					}
+					if (response.status == 500) {
+						setServerError(true);
+					}
+				}
+			} catch (error) {
+				setServerError(true);
+				console.log(error);
+			}
 		}
 	};
+
 	return (
 		<div className="">
 			<UpperPageStripe

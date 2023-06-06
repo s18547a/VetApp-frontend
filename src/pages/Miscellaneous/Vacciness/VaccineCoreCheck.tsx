@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 function VaccineCoreCheck({ onCheck }) {
 	return (
 		<div className="row">
@@ -18,4 +20,4 @@ function VaccineCoreCheck({ onCheck }) {
 		</div>
 	);
 }
-export default VaccineCoreCheck;
+export default memo(VaccineCoreCheck);

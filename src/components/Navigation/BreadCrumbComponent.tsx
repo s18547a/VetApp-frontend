@@ -1,4 +1,5 @@
-import { ReactElement } from 'react';
+import { element } from 'prop-types';
+import { ReactElement, memo } from 'react';
 
 interface BreadCrumbType {
 	label: string;
@@ -31,4 +32,4 @@ function BreadCrumbComponent(props: {
 	);
 }
 
-export default BreadCrumbComponent;
+export default memo(BreadCrumbComponent);

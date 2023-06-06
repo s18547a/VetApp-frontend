@@ -2,6 +2,7 @@ import { XLg } from 'react-bootstrap-icons';
 import ModalEnableCancelBtn from '../../../components/Modal/ModalEnableCancelBtn';
 
 function ActivitiesTable({ medicalActivityList, setDeletedId }) {
+	console.log('Render medList');
 	return (
 		<table className=" table table-bordered">
 			<thead>

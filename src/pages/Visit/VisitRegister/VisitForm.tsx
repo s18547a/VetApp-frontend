@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { VisitApiCalls } from '../../../apiCalls/visitApiCalls';
@@ -107,7 +107,7 @@ function VisitForm(): ReactElement {
 	const [realised, setRealised] = useState<boolean>(false);
 	const [reservedId, setReservedId] = useState('');
 
-	const onChange = (e): void => {
+	const onChange = useCallback((e): void => {
 		const { name, value } = e.target;
 		if (name == 'AnimalId' || name == 'OwnerId') {
 			setVisit((prev) => ({
@@ -122,9 +122,9 @@ function VisitForm(): ReactElement {
 			...prev,
 			[name]: value,
 		}));
-	};
+	}, []);
 
-	const onChangeOwner = (e): void => {
+	const onChangeOwner = useCallback((e): void => {
 		setError((prev) => ({
 			...prev,
 			AnimalId: '',
@@ -136,44 +136,14 @@ function VisitForm(): ReactElement {
 			OwnerId: value,
 			AnimalId: '',
 		}));
-	};
+	}, []);
 
-	const handleDateChange = (e): void => {
+	const handleDateChange = useCallback((e): void => {
 		setVisit((prev) => ({
 			...prev,
 			VisitDate: e,
 		}));
-	};
-
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-
-		if (validateForm()) {
-			setDisabledButton(true);
-			try {
-				const newVisit = visit;
-				newVisit.ReservationId = reservedId;
-
-				const response = await visitApiCalls.registerVisit(newVisit);
-				if (response) {
-					setDisabledButton(false);
-
-					if (response.status == 201) {
-						navigate('/visits', {
-							state: { id: (await response.json()).newId },
-						});
-					}
-					if (response.status == 500) {
-						setServerError(true);
-					}
-				}
-			} catch (error) {
-				console.log(error);
-				setDisabledButton(false);
-				setServerError(true);
-			}
-		}
-	};
+	}, []);
 
 	const validateForm = (): boolean => {
 		let isValid = true;
@@ -254,7 +224,7 @@ function VisitForm(): ReactElement {
 		}
 	};
 
-	const changeVaccine = (e) => {
+	const changeVaccine = useCallback((e) => {
 		const { name, value } = e.target;
 
 		let vacList = visit.VaccineList;
@@ -270,7 +240,7 @@ function VisitForm(): ReactElement {
 			...prev,
 			VaccineList: vacList,
 		}));
-	};
+	}, []);
 
 	const [vaccineList, setVaccineList] = useState<VaccineType[]>([]);
 
@@ -322,7 +292,35 @@ function VisitForm(): ReactElement {
 	}, [visit.AnimalId]);
 
 	const [disabledButton, setDisabledButton] = useState(false);
+	const handleSubmit = async (e) => {
+		e.preventDefault();
 
+		if (validateForm()) {
+			setDisabledButton(true);
+			try {
+				const newVisit = visit;
+				newVisit.ReservationId = reservedId;
+
+				const response = await visitApiCalls.registerVisit(newVisit);
+				if (response) {
+					setDisabledButton(false);
+
+					if (response.status == 201) {
+						navigate('/visits', {
+							state: { id: (await response.json()).newId },
+						});
+					}
+					if (response.status == 500) {
+						setServerError(true);
+					}
+				}
+			} catch (error) {
+				console.log(error);
+				setDisabledButton(false);
+				setServerError(true);
+			}
+		}
+	};
 	return (
 		<div className="">
 			<UpperPageStripe

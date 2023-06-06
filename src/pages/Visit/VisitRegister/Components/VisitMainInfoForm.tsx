@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, memo } from 'react';
 import SubmitFormButton from '../../../../components/Buttons/SubmitFormButton';
 import FormDateReactDiv from '../../../../components/Form/FormDateRectDiv';
 
@@ -140,4 +140,4 @@ function VisitMainInfoForm({
 	);
 }
 
-export default VisitMainInfoForm;
+export default memo(VisitMainInfoForm);

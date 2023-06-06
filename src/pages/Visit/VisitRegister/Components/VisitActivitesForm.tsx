@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import MedicalActivity from '../../../../classes/MedicalActivity';
 
 function VisitActivitiesForm({
@@ -42,4 +43,4 @@ function VisitActivitiesForm({
 	);
 }
 
-export default VisitActivitiesForm;
+export default memo(VisitActivitiesForm);

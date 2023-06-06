@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 function CardTitleCompnenet({ label }: { label: string }) {
 	return (
 		<div className=" card-title">
@@ -6,4 +8,4 @@ function CardTitleCompnenet({ label }: { label: string }) {
 	);
 }
 
-export default CardTitleCompnenet;
+export default memo(CardTitleCompnenet);

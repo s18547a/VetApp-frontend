@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, memo } from 'react';
 
 function MainPageCaroseul(): ReactElement {
 	return (
@@ -69,4 +69,4 @@ function MainPageCaroseul(): ReactElement {
 	);
 }
 
-export default MainPageCaroseul;
+export default memo(MainPageCaroseul);

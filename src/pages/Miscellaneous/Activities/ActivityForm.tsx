@@ -1,4 +1,4 @@
-import { ReactElement, useState } from 'react';
+import { ReactElement, useCallback, useState } from 'react';
 import { VisitApiCalls } from '../../../apiCalls/visitApiCalls';
 import SubmitFormButton from '../../../components/Buttons/SubmitFormButton';
 import FormDiv from '../../../components/Form/FormDiv';
@@ -23,14 +23,14 @@ function ActivityForm({
 		ActivityName: '',
 	});
 
-	const onChange = (e): void => {
+	const onChange = useCallback((e): void => {
 		const { name, value } = e.target;
 
 		setMedicalActivity((prev) => ({
 			...prev,
 			[name]: value,
 		}));
-	};
+	}, []);
 	const visitApiCalls = new VisitApiCalls();
 	const handleSubmit = async (e): Promise<void> => {
 		e.preventDefault();

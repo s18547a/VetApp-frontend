@@ -75,4 +75,4 @@ function VisitVaccineForm({
 	);
 }
 
-export default VisitVaccineForm;
+export default memo(VisitVaccineForm);

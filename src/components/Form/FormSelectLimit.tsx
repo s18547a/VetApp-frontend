@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, memo } from 'react';
 
 function FormSelectLimit({
 	label,
@@ -71,4 +71,4 @@ function FormSelectLimit({
 	);
 }
 
-export default FormSelectLimit;
+export default memo(FormSelectLimit);

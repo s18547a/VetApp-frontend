@@ -1,4 +1,4 @@
-import { ReactElement, useState } from 'react';
+import { ReactElement, useCallback, useState } from 'react';
 import { OwnerApiCalls } from '../../../apiCalls/ownerApiCalls';
 import { UserApiCalls } from '../../../apiCalls/userApiCalls';
 import SubmitFormButton from '../../../components/Buttons/SubmitFormButton';
@@ -39,14 +39,14 @@ function OwnerForm({
 	const ownerApiCalls = new OwnerApiCalls();
 	const userApiCalls = new UserApiCalls();
 
-	const handleChange = (e): void => {
+	const handleChange = useCallback((e): void => {
 		const { name, value } = e.target;
 
 		setOwner((prev) => ({
 			...prev,
 			[name]: value,
 		}));
-	};
+	}, []);
 
 	const validateForm = (): boolean => {
 		let isValid = true;

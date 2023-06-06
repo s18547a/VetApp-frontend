@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, memo, useEffect, useState } from 'react';
 import { AnimalApiCalls } from '../../apiCalls/animalApiCalls';
 import Animal from '../../classes/Animal';
 
@@ -96,4 +96,4 @@ function SelectAnimalComponent({
 	);
 }
 
-export default SelectAnimalComponent;
+export default memo(SelectAnimalComponent);

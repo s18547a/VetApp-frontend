@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useCallback, useEffect, useState } from 'react';
 
 import { VaccineApiCalls } from '../../../apiCalls/vaccineApiCalls';
 import SubmitFormButton from '../../../components/Buttons/SubmitFormButton';
@@ -42,34 +42,37 @@ function VaccineForm({
 		};
 		loadAnimalSpecies();
 	}, []);
-	const onChange = (e): void => {
+	const onChange = useCallback((e): void => {
 		e.preventDefault();
 		const { name, value } = e.target;
-		console.log(name, value);
 
 		setVaccineType((prev) => ({
 			...prev,
 			[name]: value,
 		}));
-	};
+	}, []);
 
-	const onCheck = (): void => {
+	const onCheck = useCallback((): void => {
 		setVaccineType((prev) => ({
 			...prev,
 			Core: !vaccineType.Core,
 		}));
-	};
+	}, []);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		vaccineType.Species === 'Ogolna'
 			? setVaccineType((prev) => ({ ...prev, Species: null }))
 			: '';
+
+		console.log(vaccineType);
 		if (validateForm()) {
 			setDisabledButton(true);
 			try {
 				const respone = await vaccineApiCalls.registerVaccine(vaccineType);
 				if (respone) {
+					setDisabledButton(false);
+
 					if (respone.status == 201) {
 						setEdited('Tr');
 					}

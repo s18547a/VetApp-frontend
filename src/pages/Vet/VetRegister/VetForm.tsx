@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useCallback, useEffect, useState } from 'react';
 import { VetApiCalls } from '../../../apiCalls/vetApiCalls';
 import { useLocation, useNavigate } from 'react-router-dom';
 import PhotoForm from '../../../components/Form/PhotoForm';
@@ -115,13 +115,13 @@ function VetForm(): ReactElement {
 		}
 	}, []);
 
-	const onChange = (e): void => {
+	const onChange = useCallback((e): void => {
 		const { name, value } = e.target;
 		setVet((prev) => ({
 			...prev,
 			[name]: value,
 		}));
-	};
+	}, []);
 	const onVetTypeChange = (e): void => {
 		const { name, value } = e.target;
 		if (vet.VetType.includes(value)) {
@@ -145,12 +145,12 @@ function VetForm(): ReactElement {
 		}
 	};
 
-	const onDateChange = (e): void => {
+	const onDateChange = useCallback((e): void => {
 		setVet((prev) => ({
 			...prev,
 			HireDate: e,
 		}));
-	};
+	}, []);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();

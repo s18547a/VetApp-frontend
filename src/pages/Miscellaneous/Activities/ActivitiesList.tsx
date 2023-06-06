@@ -9,7 +9,7 @@ import ModalEnableCancelBtn from '../../../components/Modal/ModalEnableCancelBtn
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import ActivityForm from './ActivityForm';
 import { changePageTitle } from '../../../utils/otherHelper';
-import { XLg } from 'react-bootstrap-icons';
+
 import ActivitiesTable from './ActivitiesTable';
 
 function ActivitiesList(): ReactElement {

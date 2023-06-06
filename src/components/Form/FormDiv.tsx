@@ -60,4 +60,4 @@ function FormDiv({
 	);
 }
 
-export default FormDiv;
+export default memo(FormDiv);

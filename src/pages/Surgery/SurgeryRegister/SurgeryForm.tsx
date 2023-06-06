@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useCallback, useEffect, useState } from 'react';
 
 import SelectOwnerComponent from '../../../components/Form/SelectOwnerComponent';
 import SelectAnimalComponent from '../../../components/Form/SelectAnimalComponent';
@@ -95,7 +95,7 @@ function SurgeryForm(): ReactElement {
 			console.log(error);
 		}
 	};
-	const onChangeOwner = (e): void => {
+	const onChangeOwner = useCallback((e): void => {
 		//e.preventDefault();
 		const value = e.value;
 		setAnimalList([]);
@@ -108,19 +108,19 @@ function SurgeryForm(): ReactElement {
 			...prev,
 			OwnerId: value,
 		}));
-	};
+	}, []);
 
-	const onChange = (e): void => {
+	const onChange = useCallback((e): void => {
 		const { name, value } = e.target;
 
 		setSurgery((prev) => ({
 			...prev,
 			[name]: value,
 		}));
-	};
+	}, []);
 	const [surgeryPriece, setSurgeryPriece] = useState(0);
 
-	const onChangeType = async (e): Promise<void> => {
+	const onChangeType = async (e) => {
 		const { name, value } = e.target;
 		setVets([]);
 		setAvailableHours([]);
@@ -155,7 +155,7 @@ function SurgeryForm(): ReactElement {
 	};
 	const [availableDayList, setavailableDaysList] = useState<String[]>([]);
 	const [availableDayListError, setavailableDaysListError] = useState('');
-	const onChangeVet = async (e): Promise<void> => {
+	const onChangeVet = useCallback(async (e) => {
 		const { name, value } = e.target;
 		setError((prev) => ({
 			...prev,
@@ -182,10 +182,10 @@ function SurgeryForm(): ReactElement {
 			console.log(error);
 			setServerError(true);
 		}
-	};
+	}, []);
 
 	const navigate = useNavigate();
-	const onHourChange = (e): void => {
+	const onHourChange = useCallback((e) => {
 		setError((prev) => ({
 			...prev,
 			StartTime: '',
@@ -195,16 +195,16 @@ function SurgeryForm(): ReactElement {
 			...prev,
 			StartTime: value,
 		}));
-	};
-	const handleSubmit = async (e): Promise<void> => {
+	}, []);
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		console.log(surgery);
 		if (validateForm()) {
 			setDisabledButton(true);
 			try {
 				const response = await surgeryApiCalls.registerSurgery(surgery);
 				if (response) {
+					setDisabledButton(false);
 					if (response.status == 201) {
 						navigate('/surgeries', {
 							state: { newId: (await response.json()).newId },
@@ -240,9 +240,8 @@ function SurgeryForm(): ReactElement {
 	};
 
 	const handleReactDatePicker = async (e) => {
-		console.log(e);
 		//	const date: String = e.toISOString().split('T')[0];
-		console.log(e);
+
 		setSurgery((prev) => ({
 			...prev,
 			SurgeryDate: e,
@@ -265,7 +264,7 @@ function SurgeryForm(): ReactElement {
 				} else if (respone.status == 404) {
 					setError((prev) => ({
 						...prev,
-						StartTime: 'Brak wyników',
+						StartTime: 'Brak dostępnych terminów',
 					}));
 				} else {
 					setServerError(true);

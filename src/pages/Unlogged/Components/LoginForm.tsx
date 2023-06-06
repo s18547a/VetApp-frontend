@@ -15,14 +15,14 @@ function LoginForm({
 
 	const [serverError, setServerError] = useState(false);
 
-	const handleChange = (e): void => {
+	const handleChange = useCallback((e): void => {
 		const { name, value } = e.target;
 
 		editLoginForm((prev) => ({
 			...prev,
 			[name]: value,
 		}));
-	};
+	}, []);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -50,6 +50,7 @@ function LoginForm({
 					}
 				}
 			} catch (error) {
+				setDisabledButton(false);
 				console.log(error);
 				setServerError(true);
 			}
@@ -73,6 +74,7 @@ function LoginForm({
 		return isValid;
 	};
 	const [disabledButton, setDisabledButton] = useState(false);
+
 	return (
 		<form onSubmit={handleSubmit} className="container">
 			<div className="row justify-content-center">

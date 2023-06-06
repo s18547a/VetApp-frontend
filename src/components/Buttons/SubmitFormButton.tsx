@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, memo } from 'react';
 import { CheckLg } from 'react-bootstrap-icons';
 
 function SubmitFormButton({
@@ -21,4 +21,4 @@ function SubmitFormButton({
 	);
 }
 
-export default SubmitFormButton;
+export default memo(SubmitFormButton);

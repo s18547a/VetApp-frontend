@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 function VaccineSpeciesSelect({ error, speciesList, onChange }) {
 	return (
 		<div className="row">
@@ -40,4 +42,4 @@ function VaccineSpeciesSelect({ error, speciesList, onChange }) {
 	);
 }
 
-export default VaccineSpeciesSelect;
+export default memo(VaccineSpeciesSelect);

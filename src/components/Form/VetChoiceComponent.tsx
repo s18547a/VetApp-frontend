@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, memo } from 'react';
 
 import Vet from '../../classes/Vet';
 import { spaceContact } from '../../utils/contactHelper';
@@ -74,4 +74,4 @@ function VetChoiceComponent({
 	);
 }
 
-export default VetChoiceComponent;
+export default memo(VetChoiceComponent);
