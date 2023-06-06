@@ -17,6 +17,7 @@ import VetProfileTab from './Components/VetProfileMain';
 import { getCurrentDate } from '../../../utils/getCurrentDate';
 import { changePageTitle } from '../../../utils/otherHelper';
 import UpperPageStripe from '../../../components/General/UpperPageStripe';
+import RegisterSuccessBannerComponent from '../../../components/InfoBanners/RegisterSuccessBannerComponent';
 function VetProfile(): ReactElement {
 	const params = useParams();
 	const location = useLocation();
@@ -44,6 +45,7 @@ function VetProfile(): ReactElement {
 	const reservationApiCalls = new ReservationApiCalls();
 	const surgeryApiCalls = new SurgeryApiCalls();
 	const vetApiCalls = new VetApiCalls();
+
 	useEffect(() => {
 		changePageTitle('Profil');
 		let VetId = getCurrentUser().userTypeId;
@@ -142,7 +144,13 @@ function VetProfile(): ReactElement {
 		loadVetReservations();
 		loadVetSurgeries();
 		loadTodaySchedulde();
+		const state = location.state as { updated: boolean };
+		if (state != null) {
+			setUpdatedSchedulde(state.updated);
+		}
 	}, []);
+
+	const [updatedSchedulde, setUpdatedSchedulde] = useState(false);
 
 	return (
 		<div className="">
@@ -170,6 +178,10 @@ function VetProfile(): ReactElement {
 			</UpperPageStripe>
 			<div className="container">
 				<ServerErrorInfoComponenet serverError={serverError} />
+				<RegisterSuccessBannerComponent
+					newId={updatedSchedulde ? vet.VetId : ''}
+					message={'Zaktuazliowano: '}
+				/>
 
 				<div className="row ">
 					<div className="col-12">

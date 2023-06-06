@@ -169,9 +169,13 @@ function VetForm(): ReactElement {
 				if (response) {
 					setDisabledButton(false);
 					if (response.status == 201) {
-						navigate('/vets', {
-							state: { newId: (await response.json()).newId },
-						});
+						if (editForm) {
+							navigate(`/vets/${editVetId}`, { state: { updated: true } });
+						} else {
+							navigate('/vets', {
+								state: { newId: (await response.json()).newId },
+							});
+						}
 					}
 					if (response.status == 409) {
 						setError((prev) => ({

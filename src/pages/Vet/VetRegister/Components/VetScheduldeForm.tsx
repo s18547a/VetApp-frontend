@@ -184,9 +184,8 @@ function VetScheduldeForm(): ReactElement {
 				const response = await vetApiCalls.updateSchedulde(newSchedulde);
 				if (response) {
 					if (response.status == 201) {
-						navigate(`/vets/${params.VetId}`);
-					}
-					if (response.status == 500) {
+						navigate(`/vets/${params.VetId}`, { state: { updated: true } });
+					} else {
 						setServerError(true);
 					}
 				}

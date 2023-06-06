@@ -69,7 +69,7 @@ function VetList(): ReactElement {
 				<ServerErrorInfoComponenet serverError={serverError} />
 				<RegisterSuccessBannerComponent
 					newId={VetId}
-					message={'Zmodyfikowany weterynarz: '}
+					message={'Nowy weterynarz: '}
 				/>
 
 				<div className="card card-body shadow">
