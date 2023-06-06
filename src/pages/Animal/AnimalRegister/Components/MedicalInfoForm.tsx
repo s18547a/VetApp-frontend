@@ -38,7 +38,7 @@ function MedicalInfoForm(): ReactElement {
 
 	useEffect(() => {
 		const state = location.state as { medicalInfo: AnimalMedicalInfo };
-		console.log(state);
+
 		if (state) {
 			setMedicalInfo(state.medicalInfo);
 		}
@@ -51,7 +51,9 @@ function MedicalInfoForm(): ReactElement {
 			const response = await animalApiCalls.updateMedicalInfo(medicalInfo);
 			if (response) {
 				if (response.status == 201) {
-					navigate(`/animals/${medicalInfo.AnimalId}`);
+					navigate(`/animals/${medicalInfo.AnimalId}`, {
+						state: { id: medicalInfo.AnimalId },
+					});
 				}
 				if (response.status == 500) {
 					setServerError(true);
