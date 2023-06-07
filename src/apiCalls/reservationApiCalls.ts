@@ -5,6 +5,7 @@ import {
 } from '../utils/apiCallsHelper';
 import { isAuthenticated } from '../utils/authHelper';
 import { getCurrentDate } from '../utils/getCurrentDate';
+import { responseAuthenticationHandler } from '../utils/reponseAuthorizationHandler';
 import { isVet } from '../utils/userType';
 import { domain } from './config/domain';
 export class ReservationApiCalls {
@@ -19,14 +20,14 @@ export class ReservationApiCalls {
 
 		const options = createHTTPPostOptions(isAuthenticated(), reservationString);
 		const promise = fetch(this.baseUrl, options);
-
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
 	getReservations = async () => {
 		const options = createHttpGetOptions(isVet());
 		const promise = await fetch(this.baseUrl, options);
-
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -35,6 +36,7 @@ export class ReservationApiCalls {
 		const url = `${this.baseUrl}?OwnerId=${OwnerId}`;
 
 		const promise = fetch(url, options);
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -43,6 +45,7 @@ export class ReservationApiCalls {
 		const url = `${this.baseUrl}?VetId=${VetId}`;
 
 		const promise = fetch(url, options);
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -50,6 +53,7 @@ export class ReservationApiCalls {
 		const options = createHttpGetOptions(isVet());
 		const url = `${this.baseUrl}?VetId=${VetId}&Date=${getCurrentDate()}`;
 		const promise = fetch(url, options);
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -58,7 +62,7 @@ export class ReservationApiCalls {
 		const url = `${this.baseUrl}/${ReservationId}`;
 
 		const promise = fetch(url, options);
-
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 }

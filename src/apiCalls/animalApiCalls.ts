@@ -5,6 +5,7 @@ import {
 	createHTTPutOptions,
 } from '../utils/apiCallsHelper';
 import { getCurrentUser, isAuthenticated } from '../utils/authHelper';
+import { responseAuthenticationHandler } from '../utils/reponseAuthorizationHandler';
 import { isManager, isVet } from '../utils/userType';
 import { domain } from './config/domain';
 
@@ -22,6 +23,9 @@ export class AnimalApiCalls {
 		const url = `${this.baseUrl}/types`;
 		const options = createHttpGetOptions(isAuthenticated());
 		const promise = await fetch(url, options);
+
+		responseAuthenticationHandler(promise);
+
 		return promise;
 	};
 
@@ -29,6 +33,7 @@ export class AnimalApiCalls {
 		const url = `${this.baseUrl}/species`;
 		const options = createHttpGetOptions(isManager());
 		const promise = await fetch(url, options);
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -36,6 +41,7 @@ export class AnimalApiCalls {
 		const url = this.baseUrl;
 		const options = createHttpGetOptions(isVet());
 		const promise = await fetch(url, options);
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -50,6 +56,7 @@ export class AnimalApiCalls {
 		const options = createHTTPPostOptions(isAuthenticated(), animal);
 
 		const promise = await fetch(url, options);
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -59,6 +66,7 @@ export class AnimalApiCalls {
 		const options = createHttpGetOptions(isAuthenticated());
 
 		const promise = await fetch(url, options);
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -66,7 +74,7 @@ export class AnimalApiCalls {
 		const url = `${this.baseUrl}/${AnimalId}`;
 		const options = createHttpGetOptions(isAuthenticated());
 		const promise = await fetch(url, options);
-
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 	getAnimalsByOwnerEmail = async (Email: string) => {
@@ -74,7 +82,7 @@ export class AnimalApiCalls {
 
 		const options = createHttpGetOptions(isAuthenticated());
 		const promise = await fetch(url, options);
-
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -82,11 +90,10 @@ export class AnimalApiCalls {
 		const url = this.baseUrl;
 		const stringifyAnimal = JSON.stringify(Animal);
 
-		const token = isAuthenticated() ? getCurrentUser().token : null;
-
 		const options = createHTTPutOptions(isAuthenticated(), stringifyAnimal);
 
-		const promise = fetch(url, options);
+		const promise = await fetch(url, options);
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -94,7 +101,7 @@ export class AnimalApiCalls {
 		const url = `${this.baseUrl}/${AnimalId}/illnesses`;
 		const options = createHttpGetOptions(isAuthenticated());
 		const promise = await fetch(url, options);
-
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -103,7 +110,7 @@ export class AnimalApiCalls {
 		const options = createHTTPutOptions(isVet(), stringIllness);
 
 		const promise = await fetch(this.illnessesUrl, options);
-
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -112,7 +119,7 @@ export class AnimalApiCalls {
 
 		const options = createHttpGetOptions(isAuthenticated());
 		const promise = await fetch(url, options);
-
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -121,7 +128,7 @@ export class AnimalApiCalls {
 
 		const options = createHTTPutOptions(isVet(), stringifyAMI);
 		const promise = await fetch(this.animalMedInfoURL, options);
-
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 }

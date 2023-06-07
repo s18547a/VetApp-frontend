@@ -7,6 +7,7 @@ import {
 } from '../utils/apiCallsHelper';
 import { isAuthenticated } from '../utils/authHelper';
 import { getCurrentDate } from '../utils/getCurrentDate';
+import { responseAuthenticationHandler } from '../utils/reponseAuthorizationHandler';
 import { isVet } from '../utils/userType';
 import { SearchListParamter } from '../utils/VisitListParameters';
 import { domain } from './config/domain';
@@ -21,13 +22,14 @@ export class SurgeryApiCalls {
 		const url = `${this.baseUrl}/${surgeryId}`;
 		const options = createHttpGetOptions(isAuthenticated());
 		const promise = await fetch(url, options);
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
 	getSurgeries = async () => {
 		const options = createHttpGetOptions(isVet());
 		const promise = await fetch(this.baseUrl, options);
-
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -35,7 +37,7 @@ export class SurgeryApiCalls {
 		const ulr = `${this.baseUrl}?OwnerId=${OwnerId}`;
 		const options = createHttpGetOptions(isAuthenticated());
 		const promise = await fetch(ulr, options);
-
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -43,7 +45,7 @@ export class SurgeryApiCalls {
 		const ulr = `${this.baseUrl}?VetId=${VetId}`;
 		const options = createHttpGetOptions(isAuthenticated());
 		const promise = await fetch(ulr, options);
-
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -53,7 +55,7 @@ export class SurgeryApiCalls {
 		const url = `${this.baseUrl}/search${paramters.createURLString()}`;
 		const options = createHttpGetOptions(isAuthenticated());
 		const promise = await fetch(url, options);
-
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -61,7 +63,7 @@ export class SurgeryApiCalls {
 		const url = `${this.baseUrl}?VetId=${VetId}&Date=${getCurrentDate()}`;
 		const options = createHttpGetOptions(isVet());
 		const promise = await fetch(url, options);
-
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -69,6 +71,7 @@ export class SurgeryApiCalls {
 		const url = `${this.baseUrl}/types`;
 		const options = createHttpGetOptions(isVet());
 		const promise = await fetch(url, options);
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -78,6 +81,7 @@ export class SurgeryApiCalls {
 		const options = createHTTPPostOptions(isVet(), surgeryString);
 
 		const promise = await fetch(this.baseUrl, options);
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -95,6 +99,7 @@ export class SurgeryApiCalls {
 		const options = createHTTPutOptions(isVet(), surgeryReportBodyString);
 
 		const promise = await fetch(url, options);
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -103,7 +108,7 @@ export class SurgeryApiCalls {
 		const options = createHTTPDeleteOptions(isVet());
 
 		const promise = await fetch(url, options);
-
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 }

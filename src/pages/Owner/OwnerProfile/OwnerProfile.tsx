@@ -7,6 +7,7 @@ import ProfileDiv from '../../../components/Profile/ProfileDiv';
 import UpperPageStripe from '../../../components/General/UpperPageStripe';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
+
 function OwnerProfile(): ReactElement {
 	const [owner, setOwner] = useState<Owner>();
 
@@ -17,12 +18,13 @@ function OwnerProfile(): ReactElement {
 		const user = getCurrentUser();
 		try {
 			const response = await ownerApiCalls.getOwnerById(user.userTypeId);
-
-			if (response.status == 200) {
-				setOwner(await response.json());
-			}
-			if (response.status == 500) {
-				setServerError(true);
+			if (response) {
+				if (response.status == 200) {
+					setOwner(await response.json());
+				}
+				if (response.status == 500) {
+					setServerError(true);
+				}
 			}
 		} catch (error) {
 			setServerError(true);

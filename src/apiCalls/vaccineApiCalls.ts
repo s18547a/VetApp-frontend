@@ -5,6 +5,7 @@ import {
 	createHTTPPostOptions,
 } from '../utils/apiCallsHelper';
 import { isAuthenticated } from '../utils/authHelper';
+import { responseAuthenticationHandler } from '../utils/reponseAuthorizationHandler';
 import { isManager } from '../utils/userType';
 import { domain } from './config/domain';
 
@@ -17,7 +18,7 @@ export class VaccineApiCalls {
 	getVaccines = async () => {
 		const options = createHttpGetOptions(isManager());
 		const promise = await fetch(this.baseUrl, options);
-
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -25,7 +26,7 @@ export class VaccineApiCalls {
 		const url = `${this.baseUrl}/${AnimalId}`;
 		const options = createHttpGetOptions(isAuthenticated());
 		const promise = await fetch(url, options);
-
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -33,7 +34,7 @@ export class VaccineApiCalls {
 		const url = `${this.baseUrl}/core/${AnimalId}`;
 		const options = createHttpGetOptions(isAuthenticated());
 		const promise = await fetch(url, options);
-
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -42,7 +43,7 @@ export class VaccineApiCalls {
 		const url = `${this.baseUrl}/types?unAdministratedAnimalId=${AnimalId}`;
 		const options = createHttpGetOptions(isAuthenticated());
 		const promise = await fetch(url, options);
-
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -53,6 +54,7 @@ export class VaccineApiCalls {
 		);
 
 		const promise = await fetch(this.baseUrl, options);
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -60,6 +62,7 @@ export class VaccineApiCalls {
 		const options = createHTTPDeleteOptions(isManager());
 		const url = `${this.baseUrl}/${vaccineType}`;
 		const promise = await fetch(url, options);
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 }

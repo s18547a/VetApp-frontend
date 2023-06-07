@@ -65,28 +65,27 @@ function VaccineForm({
 			? setVaccineType((prev) => ({ ...prev, Species: null }))
 			: '';
 
-		console.log(vaccineType);
 		if (validateForm()) {
 			setDisabledButton(true);
 			try {
-				const respone = await vaccineApiCalls.registerVaccine(vaccineType);
-				if (respone) {
+				const response = await vaccineApiCalls.registerVaccine(vaccineType);
+				if (response) {
 					setDisabledButton(false);
 
-					if (respone.status == 201) {
+					if (response.status == 201) {
 						setEdited('Tr');
 					}
-					if (respone.status == 409) {
+					if (response.status == 409) {
 						setError((prev) => ({
 							...prev,
 							VaccineType: 'Już instnieje',
 						}));
 					} else {
-						setServerError();
+						setServerError(true);
 					}
 				}
 			} catch (error) {
-				setServerError();
+				setServerError(true);
 			}
 		}
 	};

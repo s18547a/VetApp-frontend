@@ -19,10 +19,10 @@ function VaccineList() {
 	changePageTitle('Szczepienia');
 	const getVaccinesFromApi = async () => {
 		try {
-			const respone = await vaccineApiCalls.getVaccines();
-			if (respone) {
-				if (respone.status == 200) {
-					setVaccineList(await respone.json());
+			const response = await vaccineApiCalls.getVaccines();
+			if (response) {
+				if (response.status == 200) {
+					setVaccineList(await response.json());
 				} else setServerError(true);
 			}
 		} catch (error) {

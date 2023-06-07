@@ -5,7 +5,7 @@ import CardTitleCompnenet from '../../../components/General/CardTitle';
 import UpperPageStripe from '../../../components/General/UpperPageStripe';
 import ServerErrorInfoBannerComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
 import Modal from '../../../components/Modal/Modal';
-import ModalEnableCancelBtn from '../../../components/Modal/ModalEnableCancelBtn';
+
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import ActivityForm from './ActivityForm';
 import { changePageTitle } from '../../../utils/otherHelper';
@@ -25,9 +25,11 @@ function ActivitiesList(): ReactElement {
 	const getMedicalAtivitiesFromApi = async () => {
 		const response = await visitApiCalls.getMedicalAtivities();
 		try {
-			if (response.status == 200) {
-				setMedicalActivityList(await response.json());
-			} else setServerError(true);
+			if (response) {
+				if (response.status == 200) {
+					setMedicalActivityList(await response.json());
+				} else setServerError(true);
+			}
 		} catch (error) {
 			setServerError(true);
 		}
@@ -45,14 +47,16 @@ function ActivitiesList(): ReactElement {
 	const deleteActivity = async (): Promise<void> => {
 		try {
 			const response = await visitApiCalls.deleteMedicalActivity(deletedId);
-
-			if (response.status == 201) {
-				setEdited('T');
-			} else {
-				setServerError(true);
+			if (response) {
+				if (response.status == 201) {
+					setEdited('T');
+				} else {
+					setServerError(true);
+				}
 			}
 		} catch (error) {
 			console.log(error);
+			setServerError(true);
 		}
 	};
 	return (

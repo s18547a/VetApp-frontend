@@ -4,6 +4,7 @@ import {
 	createHTTPutOptions,
 } from '../utils/apiCallsHelper';
 import { isAuthenticated } from '../utils/authHelper';
+import { responseAuthenticationHandler } from '../utils/reponseAuthorizationHandler';
 import { isManager, isVet } from '../utils/userType';
 import { domain } from './config/domain';
 export class VetApiCalls {
@@ -66,7 +67,7 @@ export class VetApiCalls {
 		const url = `http://${domain}/vets?Date=${Day}`;
 		const options = createHttpGetOptions(isAuthenticated());
 		const promise = fetch(url, options);
-
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -75,14 +76,14 @@ export class VetApiCalls {
 		const url = `${this.baseUrlSchedulde}/availableHours?Date=${Day}&VetId=${VetId}&isSurgery=false`;
 
 		const promise = await fetch(url, options);
-
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 	getValiableHourForSurgery = async (Day, VetId) => {
 		const url = `${this.baseUrlSchedulde}/availableHours?Date=${Day}&VetId=${VetId}&isSurgery=true`;
 		const options = createHttpGetOptions(isVet());
 		const promise = await fetch(url, options);
-
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -90,7 +91,7 @@ export class VetApiCalls {
 		const url = `${this.baseUrl}/${VetId}/schedulde`;
 		const options = createHttpGetOptions(isVet());
 		const promise = await fetch(url, options);
-
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -98,6 +99,7 @@ export class VetApiCalls {
 		const url = `${this.baseUrl}/${VetId}/daysOfWeek`;
 		const options = createHttpGetOptions(isAuthenticated());
 		const promise = await fetch(url, options);
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -106,7 +108,7 @@ export class VetApiCalls {
 		const optios = createHTTPutOptions(isManager(), scheduldeStr);
 
 		const promise = await fetch(this.baseUrlSchedulde, optios);
-
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -114,6 +116,7 @@ export class VetApiCalls {
 		const url = `${this.baseUrlSchedulde}/full`;
 		const options = createHttpGetOptions(isManager());
 		const promise = await fetch(url, options);
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -121,7 +124,7 @@ export class VetApiCalls {
 		const url = `http://${domain}/vets/todaySchedulde?Date=${date}&VetId=${vetId}`;
 		const options = createHttpGetOptions(isVet());
 		const promise = await fetch(url, options);
-
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 }

@@ -1,3 +1,4 @@
+import { responseAuthenticationHandler } from '../utils/reponseAuthorizationHandler';
 import { domain } from './config/domain';
 
 export class ClinicInfoApiCalls {
@@ -9,7 +10,7 @@ export class ClinicInfoApiCalls {
 	getClinicSchedulde = async () => {
 		const url = `${this.baseUrl}/schedulde`;
 		const promise = await fetch(url);
-
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 }

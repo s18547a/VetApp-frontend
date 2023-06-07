@@ -4,6 +4,7 @@ import {
 	createHTTPPostOptions,
 } from '../utils/apiCallsHelper';
 import { isAuthenticated } from '../utils/authHelper';
+import { responseAuthenticationHandler } from '../utils/reponseAuthorizationHandler';
 import { isManager, isVet } from '../utils/userType';
 import { SearchListParamter } from '../utils/VisitListParameters';
 import { domain } from './config/domain';
@@ -19,7 +20,7 @@ export class VisitApiCalls {
 	getVisitList = async () => {
 		const options = createHttpGetOptions(isVet());
 		const promise = await fetch(this.baseURL, options);
-
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -27,6 +28,7 @@ export class VisitApiCalls {
 		const url = `${this.baseURL}?OwnerId=${OwnerId}`;
 		const options = createHttpGetOptions(isAuthenticated());
 		const promise = await fetch(url, options);
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -34,17 +36,17 @@ export class VisitApiCalls {
 		const url = `${this.baseURL}/${VisitId}`;
 		const options = createHttpGetOptions(isAuthenticated());
 		const promise = await fetch(url, options);
-
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
 	searchVisitList = async (paramters: SearchListParamter) => {
 		const queryURL = paramters.createURLString();
-		console.log(queryURL);
+
 		const url = `${this.baseURL}/search${paramters.createURLString()}`;
 		const options = createHttpGetOptions(isAuthenticated());
 		const promise = await fetch(url, options);
-
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -52,9 +54,9 @@ export class VisitApiCalls {
 		const stringVisit = JSON.stringify(Visit);
 
 		const options = createHTTPPostOptions(isVet(), stringVisit);
-		console.log('SENDED');
-		const promise = await fetch(this.baseURL, options);
 
+		const promise = await fetch(this.baseURL, options);
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -62,7 +64,7 @@ export class VisitApiCalls {
 		const options = createHttpGetOptions(isVet());
 
 		const promise = await fetch(this.activities, options);
-
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -73,6 +75,7 @@ export class VisitApiCalls {
 		);
 
 		const promise = await fetch(this.activities, options);
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 
@@ -80,6 +83,7 @@ export class VisitApiCalls {
 		const url = `http://${domain}/visits/activities/${medicalActivityId}`;
 		const options = createHTTPDeleteOptions(isManager());
 		const promise = await fetch(url, options);
+		responseAuthenticationHandler(promise);
 		return promise;
 	};
 }

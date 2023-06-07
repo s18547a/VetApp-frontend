@@ -25,57 +25,32 @@ function SurgeryProfile(): ReactElement {
 	const navigate = useNavigate();
 	const surgeryApiCalls = new SurgeryApiCalls();
 	const param = useParams();
-	useEffect(() => {
-		const surgeryId = param.SurgeryId;
-		console.log(surgeryId);
-		let response;
-		surgeryApiCalls
-			.getSurgery(surgeryId)
-			.then((data) => {
-				response = data;
-				return data.json();
-			})
-			.then(
-				(data) => {
-					if (response.status == 200) {
-						setSurgery(data);
-						setReport(data.Report);
-					}
-					if (response.status == 500) {
-						setServerError(true);
-					}
-				},
-				(error) => {
-					console.log(error);
+	const [disabledButton, setDisabledButton] = useState(false);
+	const loadSurgery = async () => {
+		try {
+			const surgeryId = param.SurgeryId;
+
+			const response = await surgeryApiCalls.getSurgery(surgeryId);
+			if (response) {
+				const data = await response.json();
+				if (response.status == 200) {
+					setSurgery(data);
+					setReport(data.Report);
+				}
+				if (response.status == 500) {
 					setServerError(true);
 				}
-			);
+			}
+		} catch (error) {
+			setServerError(true);
+		}
+	};
+	useEffect(() => {
+		loadSurgery();
 	}, []);
 
 	useEffect(() => {
-		const surgeryId = param.SurgeryId;
-		console.log(surgeryId);
-		let response;
-		surgeryApiCalls
-			.getSurgery(surgeryId)
-			.then((data) => {
-				response = data;
-				return data.json();
-			})
-			.then(
-				(data) => {
-					if (response.status == 200) {
-						setSurgery(data);
-					}
-					if (response.status == 500) {
-						setServerError(true);
-					}
-				},
-				(error) => {
-					console.log(error);
-					setServerError(true);
-				}
-			);
+		loadSurgery();
 	}, [reload]);
 
 	const onReportChange = (e): void => {
