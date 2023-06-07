@@ -9,8 +9,6 @@ import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbCompon
 import { getCurrentUser } from '../../../utils/authHelper';
 import { SearchListParamter } from '../../../utils/VisitListParameters';
 import { isVet, isManager, isOwner } from '../../../utils/userType';
-
-import SearchInput from '../../../components/List/SearchImput';
 import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
 import VisitSearch from './Components/VisitSearch';
 import { changePageTitle } from '../../../utils/otherHelper';

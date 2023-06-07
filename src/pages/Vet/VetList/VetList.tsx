@@ -1,11 +1,11 @@
 import { ReactElement, useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { VetApiCalls } from '../../../apiCalls/vetApiCalls';
 import Vet from '../../../classes/Vet';
 import TableOrEmpty from '../../../components/List/TableOrEmpty';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
-import { spaceContact } from '../../../utils/contactHelper';
+
 import { changePageTitle } from '../../../utils/otherHelper';
 import CardTitleCompnenet from '../../../components/General/CardTitle';
 import UpperPageStripe from '../../../components/General/UpperPageStripe';

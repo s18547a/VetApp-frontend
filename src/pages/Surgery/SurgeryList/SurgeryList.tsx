@@ -1,6 +1,6 @@
 import { useState, useEffect, ReactElement } from 'react';
-import { CheckLg } from 'react-bootstrap-icons';
-import { useNavigate, useLocation } from 'react-router-dom';
+
+import { useLocation } from 'react-router-dom';
 
 import { SurgeryApiCalls } from '../../../apiCalls/surgeryApiCalls';
 import Surgery from '../../../classes/Surgery';
