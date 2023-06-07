@@ -1,4 +1,4 @@
-import OwnerRegister from '../../Owner/OwnerForm/OwnerRegister';
+import OwnerRegister from '../../Owner/OwnerRegister/OwnerForm';
 
 function RegisterPage({
 	handleLoginFunction,

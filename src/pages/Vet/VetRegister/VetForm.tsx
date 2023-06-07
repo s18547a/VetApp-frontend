@@ -8,6 +8,7 @@ import VetSpecForm from './Components/VetSpecForm';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
 import UpperPageStripe from '../../../components/General/UpperPageStripe';
+import { isEmailValid } from '../../../utils/validatiorHelper';
 
 export interface IVetForm {
 	Name: string;
@@ -201,7 +202,7 @@ function VetForm(): ReactElement {
 			error[name] = '';
 
 			if (name === 'Email') {
-				if (!value.includes('@') && value !== '') {
+				if (!isEmailValid(value)) {
 					setError((prevErrors) => ({
 						...prevErrors,
 						[name]: 'Niepoprawny format Email',

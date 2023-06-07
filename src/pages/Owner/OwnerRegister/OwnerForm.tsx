@@ -4,6 +4,7 @@ import { UserApiCalls } from '../../../apiCalls/userApiCalls';
 import SubmitFormButton from '../../../components/Buttons/SubmitFormButton';
 import FormDiv from '../../../components/Form/FormDiv';
 import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
+import { isEmailValid } from '../../../utils/validatiorHelper';
 
 interface IOwnerForm {
 	Name: string;
@@ -56,7 +57,7 @@ function OwnerForm({
 			setPasswordError('');
 
 			if (name === 'Email') {
-				if (!value.includes('@') && value !== '') {
+				if (!isEmailValid(value)) {
 					setError((prevErrors) => ({
 						...prevErrors,
 						[name]: 'Niepoprawny format Email',

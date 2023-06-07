@@ -7,3 +7,12 @@ export function checkIfAllFieldAsFilled(formObject): boolean {
 
 	return true;
 }
+
+export function isEmailValid(email: string): boolean {
+	let isTrue: boolean = true;
+	if (!email.includes('@') && email !== '') {
+		isTrue = false;
+	}
+
+	return isTrue;
+}
