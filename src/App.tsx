@@ -42,16 +42,14 @@ const bootstrap = require('bootstrap');
 function App() {
 	const naviagate = useNavigate();
 
-	const [user, changeUser] = useState(null);
-
 	const handleLogin = (user) => {
 		sessionStorage.setItem('user', user);
-		changeUser(user);
+
 		naviagate('/profile');
 	};
 	const handleLogout = () => {
 		sessionStorage.removeItem('user');
-		changeUser(null);
+
 		naviagate('/');
 	};
 
