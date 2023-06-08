@@ -20,7 +20,10 @@ import ProfileDiv from '../../../components/Profile/ProfileDiv';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import { getCurrentDate } from '../../../utils/getCurrentDate';
 import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
-import { checkIfAllFieldAsFilled } from '../../../utils/validatiorHelper';
+import {
+	checkIfAllFieldAsFilled,
+	isEmpty,
+} from '../../../utils/validatiorHelper';
 import CardTitleCompnenet from '../../../components/General/CardTitle';
 import UpperPageStripe from '../../../components/General/UpperPageStripe';
 
@@ -227,7 +230,7 @@ function SurgeryForm(): ReactElement {
 		for (const [name, value] of Object.entries(surgery)) {
 			error[name] = '';
 
-			if (value === '' || value == undefined || value == null) {
+			if (isEmpty(value)) {
 				setError((prevErrors) => ({
 					...prevErrors,
 					[name]: 'Puste pole',
@@ -240,8 +243,6 @@ function SurgeryForm(): ReactElement {
 	};
 
 	const handleReactDatePicker = async (e) => {
-		//	const date: String = e.toISOString().split('T')[0];
-
 		setSurgery((prev) => ({
 			...prev,
 			SurgeryDate: e,

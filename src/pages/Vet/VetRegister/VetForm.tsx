@@ -8,7 +8,7 @@ import VetSpecForm from './Components/VetSpecForm';
 import BreadCrumbComponent from '../../../components/Navigation/BreadCrumbComponent';
 import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
 import UpperPageStripe from '../../../components/General/UpperPageStripe';
-import { isEmailValid } from '../../../utils/validatiorHelper';
+import { isEmailValid, isEmpty } from '../../../utils/validatiorHelper';
 
 export interface IVetForm {
 	Name: string;
@@ -56,6 +56,7 @@ function VetForm(): ReactElement {
 		Email: '',
 		Password: '',
 		HireDate: '',
+		Types: '',
 	});
 	const location = useLocation();
 	const [editForm, setEditForm] = useState(false);
@@ -210,7 +211,7 @@ function VetForm(): ReactElement {
 					isValid = false;
 				}
 			}
-			if (value === '') {
+			if (isEmpty(value) && name != 'ProfileImage' && name != 'VetType') {
 				setError((prevErrors) => ({
 					...prevErrors,
 					[name]: 'Puste pole',

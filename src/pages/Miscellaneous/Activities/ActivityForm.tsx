@@ -3,6 +3,7 @@ import { VisitApiCalls } from '../../../apiCalls/visitApiCalls';
 import SubmitFormButton from '../../../components/Buttons/SubmitFormButton';
 import FormDiv from '../../../components/Form/FormDiv';
 import CardTitleCompnenet from '../../../components/General/CardTitle';
+import { isNumberEmpty } from '../../../utils/validatiorHelper';
 
 function ActivityForm({
 	setServerError,
@@ -68,7 +69,7 @@ function ActivityForm({
 			ActivityName: '',
 		});
 		for (const [name, value] of Object.entries(medicalActivity)) {
-			if (value == '' || value == undefined || value == null || value == 0) {
+			if (isNumberEmpty(value)) {
 				setError((prev) => ({
 					...prev,
 					[name]: 'Puste pole',

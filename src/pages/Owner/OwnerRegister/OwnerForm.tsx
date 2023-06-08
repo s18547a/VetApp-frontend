@@ -4,7 +4,7 @@ import { UserApiCalls } from '../../../apiCalls/userApiCalls';
 import SubmitFormButton from '../../../components/Buttons/SubmitFormButton';
 import FormDiv from '../../../components/Form/FormDiv';
 import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
-import { isEmailValid } from '../../../utils/validatiorHelper';
+import { isEmailValid, isEmpty } from '../../../utils/validatiorHelper';
 
 interface IOwnerForm {
 	Name: string;
@@ -71,20 +71,7 @@ function OwnerForm({
 					isValid = false;
 				}
 			}
-			if (value === '') {
-				setError((prevErrors) => ({
-					...prevErrors,
-					[name]: 'Puste pole',
-				}));
-				isValid = false;
-			}
-			if (value == '') {
-				setError((prevErrors) => ({
-					...prevErrors,
-					[name]: 'Puste pole',
-				}));
-				isValid = false;
-			}
+
 			if (name == 'Contact') {
 				const isNumber = /^\d+$/.test(value);
 
@@ -95,6 +82,13 @@ function OwnerForm({
 					}));
 					isValid = false;
 				}
+			}
+			if (isEmpty(value)) {
+				setError((prevErrors) => ({
+					...prevErrors,
+					[name]: 'Puste pole',
+				}));
+				isValid = false;
 			}
 		}
 		return isValid;

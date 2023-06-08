@@ -3,6 +3,7 @@ import { UserApiCalls } from '../../../apiCalls/userApiCalls';
 import FormDiv from '../../../components/Form/FormDiv';
 import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErrorInfoBannerComponent';
 import SubmitFormButton from '../../../components/Buttons/SubmitFormButton';
+import { isEmpty } from '../../../utils/validatiorHelper';
 
 function LoginForm({
 	handleLogin,
@@ -60,14 +61,13 @@ function LoginForm({
 		let isValid = true;
 		for (const [name, value] of Object.entries(loginForm)) {
 			error[name] = '';
-			console.log(name + ' ' + value);
-			if (value == '' || value == null || value == undefined) {
+
+			if (isEmpty(value)) {
 				isValid = false;
 				setError((prev) => ({
 					...prev,
 					[name]: 'Puste pole',
 				}));
-				console.log(error[name]);
 			}
 		}
 

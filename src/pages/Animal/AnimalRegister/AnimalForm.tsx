@@ -8,6 +8,7 @@ import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErr
 import PhotoForm from '../../../components/Form/PhotoForm';
 import AnimalMainInfo from './Components/AnimalMainInfo';
 import UpperPageStripe from '../../../components/General/UpperPageStripe';
+import { isEmpty } from '../../../utils/validatiorHelper';
 
 export interface IAnimalForm {
 	Name: string | undefined;
@@ -133,7 +134,7 @@ function AnimalRegister(): ReactElement {
 		for (const [name, value] of Object.entries(animal)) {
 			error[name] = '';
 
-			if (value === '' || value == undefined || value == null) {
+			if (isEmpty(value)) {
 				if (name != 'ProfileImage') {
 					setError((prevErrors) => ({
 						...prevErrors,

@@ -8,6 +8,7 @@ import CardTitleCompnenet from '../../../components/General/CardTitle';
 import { AnimalApiCalls } from '../../../apiCalls/animalApiCalls';
 import VaccineSpeciesSelect from './VaccineSpeciesSelect';
 import VaccineCoreCheck from './VaccineCoreCheck';
+import { isEmpty } from '../../../utils/validatiorHelper';
 
 function VaccineForm({
 	setServerError,
@@ -68,17 +69,20 @@ function VaccineForm({
 		if (validateForm()) {
 			setDisabledButton(true);
 			try {
+				console.log(vaccineType);
 				const response = await vaccineApiCalls.registerVaccine(vaccineType);
 				if (response) {
+					const data = await response.json();
+					console.log(data);
+					console.log(response.status);
 					setDisabledButton(false);
 
 					if (response.status == 201) {
 						setEdited('Tr');
-					}
-					if (response.status == 409) {
+					} else if (response.status == 409) {
 						setError((prev) => ({
 							...prev,
-							VaccineType: 'Już instnieje',
+							VaccineType: 'Już istnieje',
 						}));
 					} else {
 						setServerError(true);
@@ -98,8 +102,7 @@ function VaccineForm({
 			VaccineType: '',
 		});
 		for (const [name, value] of Object.entries(vaccineType)) {
-			if (value === '' || value === undefined) {
-				console.log(value);
+			if (isEmpty(value)) {
 				setError((prev) => ({
 					...prev,
 					[name]: 'Puste pole',

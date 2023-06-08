@@ -16,6 +16,7 @@ import ServerErrorInfoComponenet from '../../../components/InfoBanners/ServerErr
 import VetChoiceComponent from '../../../components/Form/VetChoiceComponent';
 import CardTitleCompnenet from '../../../components/General/CardTitle';
 import UpperPageStripe from '../../../components/General/UpperPageStripe';
+import { isEmpty } from '../../../utils/validatiorHelper';
 
 export interface IReservationForm {
 	ReservationDate: string | undefined;
@@ -142,7 +143,6 @@ function ReservationForm(): ReactElement {
 	}, []);
 
 	const onOwnerChange = useCallback(async (e): Promise<void> => {
-		//const { name, value } = e.target;
 		const value = e.value;
 		setReservation((prev) => ({
 			...prev,
@@ -156,7 +156,7 @@ function ReservationForm(): ReactElement {
 		for (const [name, value] of Object.entries(reservation)) {
 			error[name] = '';
 
-			if (value === '' || value == undefined || value == null) {
+			if (isEmpty(value)) {
 				setError((prevErrors) => ({
 					...prevErrors,
 					[name]: 'Puste pole',
