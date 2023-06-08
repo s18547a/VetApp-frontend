@@ -46,7 +46,7 @@ function ActivityForm({
 					setDisabledButton(false);
 
 					if (response.status == 201) {
-						setEdited('Tr');
+						window.location.reload();
 					} else if (response.status == 409) {
 						setError((prev) => ({
 							...prev,

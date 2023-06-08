@@ -34,7 +34,7 @@ function VaccineList() {
 		getVaccinesFromApi();
 	}, []);
 
-	const [edited, setEdited] = useState('');
+	const [edited, setEdited] = useState(false);
 
 	useEffect(() => {
 		getVaccinesFromApi();
@@ -45,7 +45,7 @@ function VaccineList() {
 			const response = await vaccineApiCalls.deleteVaccine(deletedVaccine);
 			if (response) {
 				if (response.status == 201) {
-					setEdited('T');
+					setEdited(!edited);
 				}
 				if (response.status == 500) {
 					setServerError(true);
@@ -86,6 +86,7 @@ function VaccineList() {
 						<VaccineForm
 							setServerError={setServerError}
 							setEdited={setEdited}
+							edited={edited}
 						/>
 					</div>
 				</div>

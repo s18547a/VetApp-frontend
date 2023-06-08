@@ -122,7 +122,7 @@ function OwnerForm({
 						if (secondRespone.status != 201) {
 							setServerError(true);
 						} else {
-							handleLogin(JSON.stringify(secondRespone.json()));
+							handleLogin(JSON.stringify(await secondRespone.json()));
 						}
 					}
 				}

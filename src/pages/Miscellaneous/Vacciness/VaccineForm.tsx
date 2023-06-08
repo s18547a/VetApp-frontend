@@ -13,9 +13,11 @@ import { isEmpty } from '../../../utils/validatiorHelper';
 function VaccineForm({
 	setServerError,
 	setEdited,
+	edited,
 }: {
 	setServerError;
 	setEdited;
+	edited;
 }): ReactElement {
 	const [vaccineType, setVaccineType] = useState<{
 		VaccineType: string;
@@ -72,13 +74,13 @@ function VaccineForm({
 				console.log(vaccineType);
 				const response = await vaccineApiCalls.registerVaccine(vaccineType);
 				if (response) {
+					setDisabledButton(false);
 					const data = await response.json();
-					console.log(data);
-					console.log(response.status);
+
 					setDisabledButton(false);
 
 					if (response.status == 201) {
-						setEdited('Tr');
+						window.location.reload();
 					} else if (response.status == 409) {
 						setError((prev) => ({
 							...prev,
@@ -89,6 +91,7 @@ function VaccineForm({
 					}
 				}
 			} catch (error) {
+				setDisabledButton(false);
 				setServerError(true);
 			}
 		}
