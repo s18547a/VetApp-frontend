@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, memo } from 'react';
 import { Search } from 'react-bootstrap-icons';
 
 function SearchButton(): ReactElement {
@@ -13,4 +13,4 @@ function SearchButton(): ReactElement {
 	);
 }
 
-export default SearchButton;
+export default memo(SearchButton);

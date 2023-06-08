@@ -8,7 +8,6 @@ function AnimalSearch(props): ReactElement {
 	});
 
 	const onChange = (e) => {
-		console.log(e);
 		const { name, value } = e.target;
 
 		setSearchParamteters((prev) => ({

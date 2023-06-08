@@ -93,8 +93,9 @@ function AnimalList(): ReactElement {
 				if (response) {
 					if (response.status == 200) {
 						setEmpty(false);
-						divideListIntoPages(await response.json());
-						setAnimalList(await response.json());
+						const data = await response.json();
+						divideListIntoPages(data);
+						setAnimalList(data);
 						navigate('/animals');
 					}
 					if (response.status == 404) {

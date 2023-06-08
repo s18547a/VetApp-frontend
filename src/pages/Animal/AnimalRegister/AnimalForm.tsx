@@ -162,7 +162,6 @@ function AnimalRegister(): ReactElement {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		console.log(animal);
 		if (validateForm()) {
 			try {
 				setDisabledButton(true);
@@ -195,6 +194,7 @@ function AnimalRegister(): ReactElement {
 					}
 				}
 			} catch (error) {
+				setDisabledButton(true);
 				console.log(error);
 				setServerError(true);
 			}
