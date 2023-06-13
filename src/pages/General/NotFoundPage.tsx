@@ -1,5 +1,6 @@
 import { ReactElement } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { isAuthenticated } from '../../utils/authHelper';
 
 function NotFoundPage(): ReactElement {
 	const naviagete = useNavigate();
@@ -11,7 +12,11 @@ function NotFoundPage(): ReactElement {
 					<button
 						className="btn btn-danger"
 						onClick={() => {
-							naviagete(-1);
+							if (isAuthenticated()) {
+								naviagete('/profile');
+							} else {
+								naviagete('/');
+							}
 						}}
 					>
 						Cofnij

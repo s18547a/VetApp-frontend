@@ -81,8 +81,9 @@ function SurgeryProfile(): ReactElement {
 
 	const handleClick = async () => {
 		try {
+			setDisabledButton(true);
 			const response = await surgeryApiCalls.cancelSurgery(surgery?.SurgeryId);
-
+			setDisabledButton(false);
 			if (response) {
 				if (response.status == 500) {
 					setServerError(true);
@@ -102,6 +103,7 @@ function SurgeryProfile(): ReactElement {
 			onClick={saveEditReport}
 			className="btn btn-primary btn-sm d-flex"
 			style={{ background: 'green' }}
+			disabled={disabledButton}
 		>
 			Zapisz
 			<div className=" ms-1">
