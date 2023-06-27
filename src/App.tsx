@@ -43,7 +43,6 @@ function App() {
 
 	const handleLogin = (user) => {
 		sessionStorage.setItem('user', user);
-
 		naviagate('/profile');
 	};
 	const handleLogout = () => {
@@ -101,6 +100,7 @@ function App() {
 					<Route path="/profile" element={isNotLogged(<UserProfile />)} />
 
 					<Route path="/animals" element={isNotLogged(<AnimalList />)} />
+					
 					<Route
 						path="/animals/register"
 						element={isNotLogged(<AnimalForm />)}
