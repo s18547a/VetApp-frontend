@@ -15,7 +15,7 @@ import { domain } from './config/domain';
 export class SurgeryApiCalls {
 	baseUrl: string;
 	constructor() {
-		this.baseUrl = `http://${domain}/surgeries`;
+		this.baseUrl = `https://${domain}/surgeries`;
 	}
 
 	getSurgery = async (surgeryId: string | undefined) => {

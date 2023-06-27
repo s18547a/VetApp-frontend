@@ -13,8 +13,8 @@ export class VisitApiCalls {
 	baseURL: string;
 	activities: string;
 	constructor() {
-		this.baseURL = `http://${domain}/visits`;
-		this.activities = `http://${domain}/visits/activities`;
+		this.baseURL = `https://${domain}/visits`;
+		this.activities = `https://${domain}/visits/activities`;
 	}
 
 	getVisitList = async () => {
@@ -80,7 +80,7 @@ export class VisitApiCalls {
 	};
 
 	deleteMedicalActivity = async (medicalActivityId: string) => {
-		const url = `http://${domain}/visits/activities/${medicalActivityId}`;
+		const url = `https://${domain}/visits/activities/${medicalActivityId}`;
 		const options = createHTTPDeleteOptions(isManager());
 		const promise = await fetch(url, options);
 		responseAuthenticationHandler(promise);

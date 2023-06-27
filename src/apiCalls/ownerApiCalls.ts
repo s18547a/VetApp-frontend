@@ -6,7 +6,7 @@ import { domain } from './config/domain';
 export class OwnerApiCalls {
 	baseUrl: string;
 	constructor() {
-		this.baseUrl = `http://${domain}/owners`;
+		this.baseUrl = `https://${domain}/owners`;
 	}
 
 	getOwnerById = async (OwnerId: string) => {

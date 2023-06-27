@@ -12,7 +12,7 @@ import { domain } from './config/domain';
 export class VaccineApiCalls {
 	baseUrl: string;
 	constructor() {
-		this.baseUrl = `http://${domain}/vaccines`;
+		this.baseUrl = `https://${domain}/vaccines`;
 	}
 
 	getVaccines = async () => {

@@ -3,7 +3,7 @@ import { domain } from './config/domain';
 export class UserApiCalls {
 	baseUrl: string;
 	constructor() {
-		this.baseUrl = `http://${domain}/users`;
+		this.baseUrl = `https://${domain}/users`;
 	}
 
 	login = async (user) => {

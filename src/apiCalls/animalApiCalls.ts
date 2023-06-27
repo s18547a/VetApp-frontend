@@ -14,7 +14,7 @@ export class AnimalApiCalls {
 	illnessesUrl: string;
 	animalMedInfoURL: string;
 	constructor() {
-		this.baseUrl = `http://${domain}/animals`;
+		this.baseUrl = `https://${domain}/animals`;
 		this.illnessesUrl = `${this.baseUrl}/illnesses`;
 		this.animalMedInfoURL = `${this.baseUrl}/medicalInfo`;
 	}

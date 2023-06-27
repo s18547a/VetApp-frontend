@@ -11,8 +11,8 @@ export class VetApiCalls {
 	baseUrl: string;
 	baseUrlSchedulde;
 	constructor() {
-		this.baseUrl = `http://${domain}/vets`;
-		this.baseUrlSchedulde = `http://${domain}/vets/schedulde`;
+		this.baseUrl = `https://${domain}/vets`;
+		this.baseUrlSchedulde = `https://${domain}/vets/schedulde`;
 	}
 
 	getVets = async () => {
@@ -64,7 +64,7 @@ export class VetApiCalls {
 	};
 
 	getVetsOnDay = async (Day: string) => {
-		const url = `http://${domain}/vets?Date=${Day}`;
+		const url = `https://${domain}/vets?Date=${Day}`;
 		const options = createHttpGetOptions(isAuthenticated());
 		const promise = fetch(url, options);
 		responseAuthenticationHandler(promise);
@@ -121,7 +121,7 @@ export class VetApiCalls {
 	};
 
 	getTodaySchedulde = async (date: string, vetId: string) => {
-		const url = `http://${domain}/vets/todaySchedulde?Date=${date}&VetId=${vetId}`;
+		const url = `https://${domain}/vets/todaySchedulde?Date=${date}&VetId=${vetId}`;
 		const options = createHttpGetOptions(isVet());
 		const promise = await fetch(url, options);
 		responseAuthenticationHandler(promise);

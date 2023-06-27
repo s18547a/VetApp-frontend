@@ -12,7 +12,7 @@ export class ReservationApiCalls {
 	baseUrl: string;
 
 	constructor() {
-		this.baseUrl = `http://${domain}/reservations`;
+		this.baseUrl = `https://${domain}/reservations`;
 	}
 
 	registerReservation = async (reservation) => {

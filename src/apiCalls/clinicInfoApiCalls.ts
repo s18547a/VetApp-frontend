@@ -4,7 +4,7 @@ import { domain } from './config/domain';
 export class ClinicInfoApiCalls {
 	baseUrl: string;
 	constructor() {
-		this.baseUrl = `http://${domain}/clinicInfo`;
+		this.baseUrl = `https://${domain}/clinicInfo`;
 	}
 
 	getClinicSchedulde = async () => {
