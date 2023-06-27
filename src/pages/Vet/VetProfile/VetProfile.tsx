@@ -72,7 +72,7 @@ function VetProfile(): ReactElement {
 				}
 			} catch (error) {
 				setServerError(true);
-				console.log(true);
+				console.log(error);
 			}
 		};
 
