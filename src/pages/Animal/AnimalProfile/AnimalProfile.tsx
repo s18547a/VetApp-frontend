@@ -77,6 +77,7 @@ function AnimalProfile(): ReactElement {
 						}
 					}
 					if (response.status == 404 || response.status == 500) {
+						console.log(response);
 						setServerError(true);
 					}
 				}

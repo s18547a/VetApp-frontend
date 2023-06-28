@@ -66,7 +66,7 @@ export class VetApiCalls {
 	getVetsOnDay = async (Day: string) => {
 		const url = `https://${domain}/vets?Date=${Day}`;
 		const options = createHttpGetOptions(isAuthenticated());
-		const promise = fetch(url, options);
+		const promise = await fetch(url, options);
 		responseAuthenticationHandler(promise);
 		return promise;
 	};

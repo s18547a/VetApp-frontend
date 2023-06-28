@@ -16,6 +16,7 @@ import CardTitleCompnenet from '../../../components/General/CardTitle';
 import UpperPageStripe from '../../../components/General/UpperPageStripe';
 import { AnimalApiCalls } from '../../../apiCalls/animalApiCalls';
 import AnimalTable from './Components/AnimalTable';
+import { error } from 'console';
 
 function AnimalList(): ReactElement {
 	const [animalList, setAnimalList] = useState<Animal[]>([]);

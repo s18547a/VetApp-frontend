@@ -21,8 +21,7 @@ function OwnerProfile(): ReactElement {
 			if (response) {
 				if (response.status == 200) {
 					setOwner(await response.json());
-				}
-				if (response.status == 500) {
+				} else if (response.status == 500 || response.status == 404) {
 					setServerError(true);
 				}
 			}
