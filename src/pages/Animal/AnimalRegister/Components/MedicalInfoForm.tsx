@@ -35,7 +35,7 @@ function MedicalInfoForm(): ReactElement {
 	const navigate = useNavigate();
 	const [serverError, setServerError] = useState<boolean>(false);
 	const animalApiCalls = new AnimalApiCalls();
-
+	const [disabledButton, setDisabledButton] = useState(false);
 	useEffect(() => {
 		const state = location.state as { medicalInfo: AnimalMedicalInfo };
 
@@ -46,10 +46,12 @@ function MedicalInfoForm(): ReactElement {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setDisabledButton(true);
 
 		try {
 			const response = await animalApiCalls.updateMedicalInfo(medicalInfo);
 			if (response) {
+				setDisabledButton(false);
 				if (response.status == 201) {
 					navigate(`/animals/${medicalInfo.AnimalId}`, {
 						state: { id: medicalInfo.AnimalId },
@@ -110,7 +112,10 @@ function MedicalInfoForm(): ReactElement {
 							<div className="row ">
 								<div className="row mb-1">
 									<div className="col-3">
-										<SubmitFormButton label={'Zapisz'} disable={false} />
+										<SubmitFormButton
+											label={'Zapisz'}
+											disable={disabledButton}
+										/>
 									</div>
 								</div>
 								<div className="col-3">

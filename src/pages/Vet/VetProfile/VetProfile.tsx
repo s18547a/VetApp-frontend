@@ -18,7 +18,7 @@ import { getCurrentDate } from '../../../utils/getCurrentDate';
 import { changePageTitle } from '../../../utils/otherHelper';
 import UpperPageStripe from '../../../components/General/UpperPageStripe';
 import RegisterSuccessBannerComponent from '../../../components/InfoBanners/RegisterSuccessBannerComponent';
-import { error } from 'console';
+
 function VetProfile(): ReactElement {
 	const params = useParams();
 	const location = useLocation();
