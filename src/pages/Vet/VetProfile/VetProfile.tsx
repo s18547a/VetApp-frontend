@@ -141,10 +141,11 @@ function VetProfile(): ReactElement {
 			}
 		};
 
-		loadVet();
-		loadVetReservations();
-		loadVetSurgeries();
-		loadTodaySchedulde();
+		loadVet()
+			.then(loadVetReservations)
+			.then(loadVetSurgeries)
+			.then(loadTodaySchedulde);
+
 		const state = location.state as { updated: boolean };
 		if (state != null) {
 			setUpdatedSchedulde(state.updated);

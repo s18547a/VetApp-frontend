@@ -37,11 +37,12 @@ function AnimalProfile(): ReactElement {
 	const location = useLocation();
 	const [updatedId, setUpadtedId] = useState('');
 	useEffect(() => {
-		loadAnimal();
-		loadMedicalInfo();
-		loadIllnesses();
-		loadAnimalVaccines();
-		loadAnimalCoreVaccines();
+		loadAnimal()
+			.then(loadMedicalInfo)
+			.then(loadIllnesses)
+			.then(loadAnimalVaccines)
+			.then(loadAnimalCoreVaccines);
+
 		const state = location.state as { id: string };
 		if (state != null) {
 			setUpadtedId(state.id);
